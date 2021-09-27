@@ -5,11 +5,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import utils.WebDriverUtils;
+import org.openqa.selenium.WebElement;
+import java.util.List;
 
 public class SaDemoSteps {
 
     SaDemoImpl impl = new SaDemoImpl();
+
+    String actual;
 
     @Given("I navigate to Saucedemo")
     public void i_navigate_to_saucedemo() {
@@ -23,17 +26,11 @@ public class SaDemoSteps {
         impl.getPage().userName.sendKeys(userName);
     }
 
-    @And("I click on Login button")
-    public void iClickOnLoginButton() {
-
-        impl.getPage().loginBtn.click();
-    }
-
     @Then("Verify error message {string}")
     public void verifyErrorMessage(String expectedErrorMsg) {
 
-        String actualText = impl.getMsg();
-        Assert.assertEquals(expectedErrorMsg, actualText);
+        actual = impl.getMsg();
+        Assert.assertEquals(expectedErrorMsg, actual);
     }
 
     @Then("I input password as {string}")
@@ -42,11 +39,39 @@ public class SaDemoSteps {
         impl.getPage().password.sendKeys(password);
     }
 
-    @Then("Verify Swag Labs title")
-    public void verifySwagLabsTitle() {
+    @Then("Verify {string} title")
+    public void verifyTitle(String expectedTitle) {
 
-        String expected = "Swag Labs";
-        Assert.assertTrue(WebDriverUtils.getDriver().getTitle().equals(expected));
+        actual = impl.getTitle();
+        Assert.assertEquals(expectedTitle, actual);
+    }
+
+    @Then("Verify {int} items")
+    public void verifyItems(int number) {
+
+        Assert.assertTrue(impl.getPage().items.size() == number);
+    }
+
+    @And("I click on {string} button")
+    public void iClickOnButton(String button) {
+
+        impl.clickButton(button);
+    }
+
+    @And("Verify {string} button")
+    public void verifyButton(String expectedText) {
+
+        actual = impl.getAddRemoveText(expectedText);
+        Assert.assertEquals(actual, expectedText);
+    }
+
+    @Then("Verify social media buttons are working")
+    public void verifySocialMediaButtonsAreWorking() {
+
+        List<WebElement> socialBtnList = impl.getPage().socialBtn;
+        for (int s = 0; s < socialBtnList.size(); s++) {
+            Assert.assertTrue(impl.getPage().socialBtn.get(s).isEnabled());
+            impl.getPage().socialBtn.get(s).click();
+        }
     }
 }
-
