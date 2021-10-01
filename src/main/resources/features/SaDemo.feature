@@ -18,7 +18,7 @@ Feature: Saucedemo scenarios
     And I click on "Login" button
     Then Verify "Swag Labs" title
 
-  Scenario: Verify total of 6 items and social media buttons
+  Scenario: Verify total of 6 items
     Then I input password as "secret_sauce"
     And I click on "Login" button
     Then Verify 6 items
