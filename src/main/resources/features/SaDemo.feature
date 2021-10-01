@@ -18,14 +18,27 @@ Feature: Saucedemo scenarios
     And I click on "Login" button
     Then Verify "Swag Labs" title
 
-  Scenario: Verify there are total of 6 items on the page
+  Scenario: Verify total of 6 items and social media buttons
     Then I input password as "secret_sauce"
     And I click on "Login" button
     Then Verify 6 items
+
+  Scenario: Verify After click add to cart button equal REMOVE
+    Then I input password as "secret_sauce"
+    And I click on "Login" button
     And I click on "Add to cart" button
-    And Verify "REMOVE" button
+    Then Verify "REMOVE" button
+
+  Scenario: Verify After click remove button equal ADD TO CART
+    Then I input password as "secret_sauce"
+    And I click on "Login" button
+    And I click on "Add to cart" button
     And I click on "Remove" button
-    And Verify "ADD TO CART" button
+    Then Verify "ADD TO CART" button
+
+  Scenario: Verify social media buttons are working
+    Then I input password as "secret_sauce"
+    And I click on "Login" button
     Then Verify social media buttons are working
 
 #  Scenario Outline: Verify error message outline

@@ -21,7 +21,7 @@ public class SaDemoSteps {
     }
 
     @Then("I input username as {string}")
-    public void iInputUsrenameAs(String userName) {
+    public void iInputUsernameAs(String userName) {
 
         impl.getPage().userName.sendKeys(userName);
     }
@@ -58,8 +58,8 @@ public class SaDemoSteps {
         impl.clickButton(button);
     }
 
-    @And("Verify {string} button")
-    public void verifyButton(String expectedText) {
+    @Then("Verify {string} button")
+    public void verifyAddRemoveButton(String expectedText) {
 
         actual = impl.getAddRemoveText(expectedText);
         Assert.assertEquals(actual, expectedText);
